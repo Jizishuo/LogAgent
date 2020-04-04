@@ -1,0 +1,1 @@
+### golang test project for log
