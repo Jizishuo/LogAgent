@@ -7,16 +7,19 @@ type KafkaConf struct {
 	MaxChan int    `ini:"maxchan"`
 }
 
+// TaillogCof配置
 type TaillogCof struct {
 	FilePth string `ini:"filePath"`
 }
 
+// etcd配置
 type Etcd struct {
 	Address string `ini:"address"`
 	Timeout int    `ini:"timeout"`
 	Key     string `ini:"key"`
 }
 
+// elasticsearch配置
 type ElasticSearch struct {
 	Address string `ini:"address"`
 	MaxChan int    `ini:"maxchan"`
@@ -24,6 +27,7 @@ type ElasticSearch struct {
 	Type    string `ini:"type"`
 }
 
+// conf 配置
 type Conf struct {
 	KafkaConf     `ini:"kafka"`
 	TaillogCof    `ini:"taillog"`
