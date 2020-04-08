@@ -7,7 +7,7 @@ import (
 	"LogAgent/taillog"
 	"fmt"
 	"log"
-	"logCollect/logAgent/etcd"
+	"LogAgent/etcd"
 	"sync"
 	"time"
 	"gopkg.in/ini.v1"
@@ -32,5 +32,12 @@ func main() {
 		return
 	}
 	log.Println("连接kakfa成功")
-	// err = etcd.Init()
+
+	// 初始化etcd
+	err = etcd.Init(cfg.Etcd.Address, time.Duration(cfg.Etcd.Timeout)*time.Millisecond)
+	if err != nil {
+		log.Printf("etcd init faild, err: %v\n", err)
+		return
+	}
+
 }
