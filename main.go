@@ -39,5 +39,26 @@ func main() {
 		log.Printf("etcd init faild, err: %v\n", err)
 		return
 	}
+	log.Println("etcd 初始化成功")
+
+	// 测试连接
+	ip, err := common.GetOutboundIP()
+	if err != nil {
+		log.Printf("获取本机ip失败:%v", err)
+		return
+	}
+	localConf := fmt.Sprintf(cfg.Etcd.Key, ip)
+	log.Println(localConf)
+	logconf, err := etcd.Get(localConf, time.Duration(cfg.Timeout)*time.Millisecond)
+	if err != nil {
+		log.Printf("get etcd data failed %v", err)
+		return
+	}
+	// 打印数据
+	for _, v := range logconf {
+		log.Printf("log conf : %v\n", v)
+	}
+	//启动日志收集管理器
+	taillog.Init(logconf)
 
 }
